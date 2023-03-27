@@ -1,6 +1,7 @@
 //import { Card } from "react-bootstrap"
 import Card from 'react-bootstrap/Card'
 import cardStyles from '@/styles/cards.module.css'
+import { useTranslation } from 'next-i18next'
 
 type CardProps = {
   name: string,
@@ -19,6 +20,8 @@ type OfficeCards = {
 }
 
 export function ContactCard({ name, image, email, phone, department, address, cvr }: CardProps) {
+  const { t: translate } = useTranslation('contact');
+
   const cvrNumber = cvr? "CVR nr: 12924453" : null;
   const addressLink = name === 'Nuuk' ? 
     'https://www.google.com/maps/place/Tumi+Consulting+ApS/@64.1719139,-51.7370675,19z/data=!3m1!4b1!4m5!3m4!1s0x4ea20fee844f428d:0xfcb56976bf831965!8m2!3d64.1719139!4d-51.7365203' 
@@ -43,7 +46,7 @@ export function ContactCard({ name, image, email, phone, department, address, cv
           <>
           <br />
             <Card.Link className={cardStyles.Link} href={`tel:${phone}`}>
-              Phone: {phone}
+              {translate('phone')} {phone}
             </Card.Link>
         </>
         )}
@@ -52,7 +55,7 @@ export function ContactCard({ name, image, email, phone, department, address, cv
           <>
             <br />
             <Card.Link className={cardStyles.Link} href={addressLink} target='_blank' rel='noreferrer'>
-              Address: {address}
+              {translate('address')} {address}
             </Card.Link>
           </>
         )}
@@ -60,7 +63,7 @@ export function ContactCard({ name, image, email, phone, department, address, cv
         {department!= null && (
           <>
           <br />
-          <i className={cardStyles.Text}>Department: {department}</i>
+          <i className={cardStyles.Text}>{translate('department')} {department}</i>
         </>
         )}
 

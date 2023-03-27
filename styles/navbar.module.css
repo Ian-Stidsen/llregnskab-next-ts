@@ -17,7 +17,7 @@
 
 .topbarLinks {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 2fr;
+  grid-template-columns: 1fr 1.4fr 2fr;
   height: 80px;
   width: 90%;
   list-style: none;

@@ -1,13 +1,17 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import PageLayout from '@/components/PageLayout'
 import introStyles from '@/styles/intro.module.css'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+
+function Home() {
+
+  const { t: translate } = useTranslation(['home', 'common']);
+
   return (
     <>
       <Head>
@@ -16,11 +20,21 @@ export default function Home() {
       </Head>
       <PageLayout>
         <div className={introStyles.containerMain}>
-          <h1 className={introStyles.title}>Welcome to</h1>
-          <h1 className={introStyles.title}>LL Regnskab ApS</h1>
+          <h1 className={introStyles.title}>{translate('welcome')}</h1>
+          <h1 className={introStyles.title}>{translate('llregnskab')}</h1>
         </div>
       </PageLayout>
     </>
   )
 }
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+    ...(await serverSideTranslations(locale, ['home', 'common'])),
+    },
+  }
+}
+
+export default Home;
 //name, image, email, phone, department, address, cvr 

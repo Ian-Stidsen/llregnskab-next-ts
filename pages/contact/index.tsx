@@ -3,8 +3,12 @@ import PageLayout from "@/components/PageLayout";
 import Head from "next/head";
 import cardStyles from '@/styles/cards.module.css'
 import introStyles from '@/styles/intro.module.css'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from "next-i18next";
 
 export default function Contact() {
+  const { t: translate } = useTranslation(['contact', 'common']);
+
   return (
     <>
       <Head>
@@ -12,7 +16,7 @@ export default function Contact() {
       </Head>
       <PageLayout>
         <div className={introStyles.container}>
-          <h1 className={introStyles.title}>Contact Us</h1>
+          <h1 className={introStyles.title}>{translate('contact_us')}</h1>
         </div>
         <div className={cardStyles.Container}>
           <ContactCard
@@ -65,4 +69,12 @@ export default function Contact() {
       </PageLayout>
     </>
   )
+}
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+    ...(await serverSideTranslations(locale, ['contact', 'common'])),
+    },
+  }
 }
