@@ -2,7 +2,7 @@ import { ContactCard } from "@/components/ContactCard";
 import PageLayout from "@/components/PageLayout";
 import Head from "next/head";
 import cardStyles from '@/styles/cards.module.css'
-import introStyles from '@/styles/intro.module.css'
+import pageHeader from '@/styles/header.module.css'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from "next-i18next";
 
@@ -15,8 +15,8 @@ export default function Contact() {
         <title>LL Regnskab - Contact</title>
       </Head>
       <PageLayout>
-        <div className={introStyles.container}>
-          <h1 className={introStyles.title}>{translate('contact_us')}</h1>
+        <div className={pageHeader.container}>
+          <h1 className={pageHeader.title}>{translate('contact_us')}</h1>
         </div>
         <div className={cardStyles.Container}>
           <ContactCard

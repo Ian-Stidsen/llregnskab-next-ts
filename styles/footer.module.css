@@ -1,0 +1,22 @@
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: rgb(85, 85, 85);
+}
+
+.text {
+  color: black;
+}
+
+.text a {
+  color: black;
+  text-decoration: none;
+}
+
+.text a:hover {
+  color: var(--theme-color);
+}

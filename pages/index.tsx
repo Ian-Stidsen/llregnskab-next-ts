@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import PageLayout from '@/components/PageLayout'
-import introStyles from '@/styles/intro.module.css'
+import pageHeader from '@/styles/header.module.css'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
-//const inter = Inter({ subsets: ['latin'] })
-
+import HomeStyles from '@/styles/Home.module.css'
+import Image from 'next/image'
 
 function Home() {
 
@@ -19,9 +17,16 @@ function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <PageLayout>
-        <div className={introStyles.containerMain}>
-          <h1 className={introStyles.title}>{translate('welcome')}</h1>
-          <h1 className={introStyles.title}>{translate('llregnskab')}</h1>
+        <div className={pageHeader.containerMain}>
+          <h1 className={pageHeader.title}>{translate('welcome')}</h1>
+          <h1 className={pageHeader.title}>{translate('llregnskab')}</h1>
+        </div>
+        <div className={HomeStyles.container}>
+            <div className={HomeStyles.intro}>
+              <h2 className={HomeStyles.introTitle}>{translate('llregnskab')}</h2>
+              <p className={HomeStyles.introText}>{translate('home_text')}</p>
+            </div>
+          <div className={HomeStyles.image}></div>
         </div>
       </PageLayout>
     </>
