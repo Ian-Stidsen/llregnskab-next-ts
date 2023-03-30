@@ -4,10 +4,8 @@ import pageHeader from '@/styles/header.module.css'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import HomeStyles from '@/styles/Home.module.css'
-import Image from 'next/image'
 
-function Home() {
-
+export default function Home() {
   const { t: translate } = useTranslation(['home', 'common']);
 
   return (
@@ -40,6 +38,4 @@ export async function getStaticProps({ locale }: any) {
     },
   }
 }
-
-export default Home;
 //name, image, email, phone, department, address, cvr 

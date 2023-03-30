@@ -9,6 +9,7 @@
 .intro {
   width: 400px;
   text-align: center;
+  max-width: 90vw;
 }
 
 .intro h2{

@@ -17,11 +17,12 @@
 
 .topbarLinks {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 2fr;
+  grid-template-columns: 1fr 1.185fr 2fr;
   height: 80px;
   width: 90%;
   list-style: none;
   margin: 0;
+  gap: 20px;
 }
 
 .topbarLinks li {
@@ -56,21 +57,30 @@
   color: var(--theme-color);
 }
 
-.navbar {
+.navbar,
+.dropNavbar {
   width: 100%;
   height: 40px;
   background-color: var(--navbar-background);
+  transition: 200ms;
+  z-index: 10;
 }
 
-.navbarLinks {
+.navbarLinks,
+.showNavbarLinks {
   display: grid;
   list-style: none;
   width: 100%;
   height: 40px;
-  grid-template-columns: repeat(3, 2fr) 1fr;
   margin: 0;
   padding: 0 40px;
   justify-items: center;
+}
+
+.navbarLinks {
+  grid-template-columns: repeat(3, 2fr) 1fr;
+  max-width: 1500px;
+  margin: auto;
 }
 
 .navbarLinks li {
@@ -98,4 +108,73 @@
 
 .languages {
   display: inline-flex;
+}
+
+.dropdownbtn {
+  display: none;
+  border: none;
+  background: none;
+  color: var(--dark-gray);
+}
+
+.dropdownbtn:hover {
+  opacity: .8;
+}
+
+.dropNavbar {
+  height: 160px;
+  position: relative;
+  border-bottom: 2px solid var(--theme-color);
+}
+
+.showNavbarLinks {
+  height: 120px;
+  grid-template-rows: repeat(4, 1fr);
+  width: 100vw;
+  padding: 0;
+}
+
+.showNavbarLinks li {
+  width: 100vw;
+  padding: 0 80px;
+}
+
+.showNavbarLinks a:hover {
+  background-color: var(--theme-color);
+  color: white;
+}
+
+@media screen and (max-width: 920px) {
+  .container {
+    height: 80px;
+  }
+
+  .topbar {
+    justify-content: space-between;
+    border-bottom: 2px solid var(--theme-color);
+  }
+
+  .topbarLinks {
+    display: none;
+  }
+
+  .navbar {
+    height: 0px;
+    background-color: var(--theme-color);
+    transition: 200ms;
+  }
+
+  .navbarLinks {
+    display: none;
+    width: 100%;
+  }
+  
+  .navLink:not(.languages .navLink) {
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
+
+  .dropdownbtn {
+    display: flex;
+  }
 }

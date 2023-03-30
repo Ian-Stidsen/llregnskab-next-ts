@@ -1,25 +1,53 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
-import { Navbar } from "react-bootstrap";
+import React, { useState } from "react";
 import navbarStyles from "@/styles/navbar.module.css";
 import Image from "next/image";
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import { useWindowSize } from "@/pages/api/useWindowSize";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export function Navigation() {
-  const { locale, locales, push } = useRouter()
+  const { locale } = useRouter()
   const { t: translate } = useTranslation('common')
   const currentPath = useRouter().asPath;
+  const { width: windowWidth } = useWindowSize();
 
+  const [navbarClass, setNavbarClass] = useState(navbarStyles.navbar);
+  const [navbarLinkClass, setNavbarLinkClass] = useState(navbarStyles.navbarLinks);
+
+  const handleDropdown = () => {
+    const navLinkTimer = setTimeout(() => {
+      setNavbarLinkClass(navbarStyles.showNavbarLinks);
+    }, 200)
+    const active = navbarClass === navbarStyles.navbar? true : false;
+    console.log(active);
+    if (active) {
+      setNavbarClass(navbarStyles.dropNavbar);      
+      navLinkTimer
+    } else {
+      setNavbarClass(navbarStyles.navbar);
+      setNavbarLinkClass(navbarStyles.navbarLinks);
+      clearTimeout(navLinkTimer);
+    }
+  };
+
+  if (windowWidth! > 920 && navbarClass !== navbarStyles.navbar) {
+    setNavbarClass(navbarStyles.navbar);
+    setNavbarLinkClass(navbarStyles.navbarLinks);
+  }
   return (
     <>
       <div className={navbarStyles.topbar}>
-        <Image
-          src="/images/logo.jpg"
-          alt="Logo"
-          height='60'
-          width='225'
-        />
+        <Link href='/' locale={locale}>
+          <Image
+            src="/images/logo.jpg"
+            alt="Logo"
+            height='60'
+            width='225'
+            />
+        </Link>
         <ul className={navbarStyles.topbarLinks}>
           <li>
             <Link className={navbarStyles.topLink} href='tel:+299641603'>{translate('telephone')} (+299)641603</Link>
@@ -39,9 +67,15 @@ export function Navigation() {
             </div>
           </li>
         </ul>
+        <button className={navbarStyles.dropdownbtn} onClick={handleDropdown}>
+          <FontAwesomeIcon
+            icon={navbarClass === navbarStyles.navbar ? faBars : faTimes}
+            style={{width: "35px", height: "35px"}}
+          />
+        </button>
       </div>
-      <Navbar className={navbarStyles.navbar}>
-          <ul className={navbarStyles.navbarLinks}>
+      <nav className={navbarClass}>
+          <ul className={navbarLinkClass}>
             <li>
               <Link className={navbarStyles.navLink} href='/' locale={locale}>{translate('home')}</Link>
             </li>
@@ -81,7 +115,7 @@ export function Navigation() {
               </Link>
             </li>
           </ul>
-      </Navbar>
+      </nav>
     </>
   );
 }
