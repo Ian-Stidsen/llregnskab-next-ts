@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { useWindowSize } from "@/pages/api/useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faEnvelope, faLocationDot, faMailBulk, faMailForward, faMailReply, faMobilePhone, faPhone, faPhoneAlt, faPhoneFlip, faPhoneSlash, faPhoneSquare, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export function Navigation() {
   const { locale } = useRouter()
@@ -37,6 +37,12 @@ export function Navigation() {
     setNavbarClass(navbarStyles.navbar);
     setNavbarLinkClass(navbarStyles.navbarLinks);
   }
+
+  const qaqortoqAddress = windowWidth! < 1000 ?
+    'Sanatorievej B1004' : 'Sanatorievej B1004, Qaqortoq';
+
+  const nuukAddress = windowWidth! < 1000 ?
+  'Jens Kreutzmannip Aqq. 4' : 'Jens Kreutzmannip Aqq. 4, 1.sal, Nuuk';
   return (
     <>
       <div className={navbarStyles.topbar}>
@@ -50,19 +56,37 @@ export function Navigation() {
         </Link>
         <ul className={navbarStyles.topbarLinks}>
           <li>
-            <Link className={navbarStyles.topLink} href='tel:+299641603'>{translate('telephone')} (+299)641603</Link>
+            <Link className={navbarStyles.topLink} href='tel:+299641603'>
+              <FontAwesomeIcon
+                className={navbarStyles.faIcons}
+                icon={faPhone}
+              />
+              {translate('telephone')} (+299)641603
+            </Link>
           </li>
           <li>
-            <Link className={navbarStyles.topLink} href='mailto:laila@llregnskab.com'>Email: laila@llregnskab.com</Link>
+            <Link className={navbarStyles.topLink} href='mailto:laila@llregnskab.com'>
+              <FontAwesomeIcon
+                className={navbarStyles.faIcons}
+                icon={faEnvelope}
+              />
+              Email: laila@llregnskab.com
+            </Link>
           </li>
           <li className={navbarStyles.topAddresses}>
-            <p>{translate('addresses')}</p>
+            <p>
+              <FontAwesomeIcon
+                className={navbarStyles.faIcons}
+                icon={faLocationDot}
+              />
+              {translate('addresses')}
+            </p>
             <div className={navbarStyles.topAddressLinks}>
               <Link className={navbarStyles.topLink} href='http://maps.google.com/?q=1004%20Sanatorievej' target='_blank' rel="noreferrer">
-                Sanatorievej B1004
+                {qaqortoqAddress}
               </Link>
               <Link className={navbarStyles.topLink} href='https://www.google.com/maps/place/Tumi+Consulting+ApS/@64.1719139,-51.7370675,19z/data=!3m1!4b1!4m5!3m4!1s0x4ea20fee844f428d:0xfcb56976bf831965!8m2!3d64.1719139!4d-51.7365203' target='_blank' rel="noreferrer">
-                Jens Kreutzmannip Aqq. 4
+                {nuukAddress}
               </Link>
             </div>
           </li>

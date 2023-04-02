@@ -17,7 +17,7 @@
 
 .topbarLinks {
   display: grid;
-  grid-template-columns: 1fr 1.185fr 2fr;
+  grid-template-columns: 1fr 1.185fr 3fr;
   height: 80px;
   width: 90%;
   list-style: none;
@@ -36,6 +36,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 315px;
 }
 
 .topAddresses p {
@@ -142,6 +143,12 @@
 .showNavbarLinks a:hover {
   background-color: var(--theme-color);
   color: white;
+}
+
+.faIcons {
+  color: var(--theme-color);
+  font-size: 18px;
+  margin-right: 15px;
 }
 
 @media screen and (max-width: 920px) {
